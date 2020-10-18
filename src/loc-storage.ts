@@ -16,7 +16,7 @@ export class LocStorage implements DataStorage {
 
 
         Object.keys(window.localStorage).forEach((key) => {
-          if(Number(key) !== NaN)
+            if (key!== 'docType')
                 documents.push(key);
         });
         return documents;
