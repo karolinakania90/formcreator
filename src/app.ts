@@ -10,6 +10,10 @@ import { TextAreaField } from "./text-area-field";
 
 export class App {
     constructor() {
+        if(window.localStorage.getItem('docType') === 'list') {
+            console.log('list');
+            return;
+        } 
         document.addEventListener('DOMContentLoaded', function () {
 
             const nameInput = new InputField("name", "Imię", "");
@@ -43,6 +47,7 @@ export class App {
             document.getElementById('saveButton').addEventListener('click', function(){
                 let locStorage = new LocStorage();
                 locStorage.saveDocument(form);
+                
             })
 
             document.getElementById('backButton').addEventListener('click', function(){
