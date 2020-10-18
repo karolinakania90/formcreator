@@ -14,9 +14,11 @@ export class LocStorage implements DataStorage {
     getDocuments(): string[] {
         const documents = [];
 
-        for (var key in window.localStorage) {
-            documents.push(key);
-        }
+
+        Object.keys(window.localStorage).forEach((key) => {
+          if(Number(key) !== NaN)
+                documents.push(key);
+        });
         return documents;
     }
 }

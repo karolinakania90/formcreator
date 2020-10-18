@@ -7,6 +7,7 @@ export class DocumentList {
     constructor() {
         this.localStorage = new LocStorage();
         this.documents = [];
+        this.getDocumentList();
     }
 
     private getDocumentList() {
