@@ -2,24 +2,31 @@ import { CheckboxField } from "./checkbox-field";
 import { DateField } from "./date-field";
 import { DocumentList } from "./document-list";
 import { EmailField } from "./email-field";
-import { Field } from "./field";
 import { Form } from "./form";
 import { InputField } from "./input-field";
-import { LocStorage } from "./loc-storage";
+import { Router } from "./router";
 import { SelectField } from "./select-field";
 import { TextAreaField } from "./text-area-field";
 
 export class App {
     constructor() {
+
         if (window.localStorage.getItem('docType') === 'list') {
-            document.addEventListener('DOMContentLoaded', function () { 
+            document.addEventListener('DOMContentLoaded', function () {
 
                 const documentList = new DocumentList();
-                
 
-                document.getElementById('document-list').innerHTML +=  documentList.render();
 
+                document.getElementById('document-list').innerHTML += documentList.render();
+                documentList.setupDeleteActions();
             });
+        }
+        else if (window.localStorage.getItem('docType') === 'edit') {
+            const docId = Router.getParam('id');
+            const documentList = new DocumentList();
+            const editForm = documentList.getDocument(docId);
+            
+            document.getElementById('main').innerHTML += editForm.render();
         }
         else {
             document.addEventListener('DOMContentLoaded', function () {
@@ -53,9 +60,7 @@ export class App {
                 document.getElementById('main').innerHTML += form.render();
 
                 document.getElementById('saveButton').addEventListener('click', function () {
-                    let locStorage = new LocStorage();
-                    locStorage.saveDocument(form);
-
+                    form.save();
                 })
 
                 document.getElementById('backButton').addEventListener('click', function () {

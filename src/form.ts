@@ -1,11 +1,12 @@
+import { BaseForm } from "./base-form";
 import { Field } from "./field";
 import { LocStorage } from "./loc-storage";
 
-export class Form {
+export class Form implements BaseForm {
     fields: Field[];
     locStorage: LocStorage;
 
-    constructor(fields: Field[]) {
+    constructor(fields: any[]) {
         this.fields = fields;
         this.locStorage = new LocStorage();
     }
@@ -15,6 +16,12 @@ export class Form {
     }
 
     save() {
+
+        this.fields.forEach(field => {
+         field.value = field.getValue();
+         console.log(field.value);
+        });
+
         this.locStorage.saveDocument(this);
     }
 
