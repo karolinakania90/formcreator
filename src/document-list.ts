@@ -1,4 +1,3 @@
-import { BaseForm } from "./base-form";
 import { Form } from "./form";
 import { LocStorage } from "./loc-storage";
 
@@ -45,8 +44,7 @@ export class DocumentList {
     }
 
     getDocument(id: string): Form {
-        var baseForm = this.localStorage.loadDocument(id);
-        return new Form(baseForm.fields);
+      return this.localStorage.loadDocument(id);      
     }
 
     removeDocumentId(doc: string) {
