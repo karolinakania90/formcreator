@@ -27,6 +27,14 @@ export class App {
             const editForm = documentList.getDocument(docId);
             
             document.getElementById('main').innerHTML += editForm.render();
+
+            document.getElementById('saveButton').addEventListener('click', function () {
+                editForm.update(docId);
+            })
+
+            document.getElementById('backButton').addEventListener('click', function () {
+                window.location.href = "index.html";
+            })
         }
         else {
             document.addEventListener('DOMContentLoaded', function () {

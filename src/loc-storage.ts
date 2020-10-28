@@ -3,7 +3,6 @@ import { DataStorage } from "./data-storage";
 import { DateField } from "./date-field";
 import { EmailField } from "./email-field";
 import { Field } from "./field";
-import { FieldLabel } from "./field-label";
 import { FieldType } from "./field-type";
 import { Form } from "./form";
 import { InputField } from "./input-field";
@@ -11,8 +10,9 @@ import { SelectField } from "./select-field";
 import { TextAreaField } from "./text-area-field";
 
 export class LocStorage implements DataStorage {
-    saveDocument(form: Form): string {
-        const timestamp = Date.now().toString();
+    saveDocument(form: Form, docId: string): string {
+        let timestamp = Date.now().toString();
+        if(docId) timestamp = docId;
         window.localStorage.setItem(timestamp, JSON.stringify(form.fields));
         return timestamp;
     }
@@ -60,11 +60,11 @@ export class LocStorage implements DataStorage {
         return documents;
     }
 
-    saveForm(form: any) {
+    saveForm() {
 
     }
 
-    loadForm(form: any) {
-        
+    loadForm() {
+
     }
 }

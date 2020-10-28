@@ -28,7 +28,7 @@ export class DocumentList {
         this.documents.forEach(doc => {
             table += '<th scope="row">' + new Date(Number.parseInt(doc)).toUTCString() + '</th>';
             table += '<th scope="row">' + '<a href="edit-document.html?id=' + doc + '">Edytuj</>' +
-                '<a  id="' + doc + '" href="#" + ">  Usun</></th></tr>';
+                '<a  id="delete-' + doc + '" href="#" + ">  Usun</></th></tr>';
 
         })
 
@@ -48,7 +48,7 @@ export class DocumentList {
     }
 
     removeDocumentId(doc: string) {
-        document.getElementById(doc).addEventListener('click', function () {
+        document.getElementById("delete-" + doc).addEventListener('click', function () {
             localStorage.removeItem(doc);
             window.location.reload();
         });

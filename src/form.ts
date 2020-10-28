@@ -16,13 +16,19 @@ export class Form {
     }
 
     save() {
-
         this.fields.forEach(field => {
             field.value = field.getValue();
-            console.log(field.value);
         });
+        
 
-        this.locStorage.saveDocument(this);
+        this.locStorage.saveDocument(this, null);
+    }
+
+    update(docId: string) {
+        this.fields.forEach(field => {
+            field.value = field.getValue();
+        });
+        this.locStorage.saveDocument(this, docId);
     }
 
     render(): string {
